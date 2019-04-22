@@ -52,21 +52,6 @@ void inializeTheVotes(){
         writeRandomVotes(arr);
     }
 }
-int * random(int num)
-{
-    int i,j;
-    int *arr= malloc(sizeof(int)*num);
-    for (i = 0; i < num; i++)
-    {
-        arr[i] = rand() % num + 1;
-        for(j=0;j<i;j++)
-        {
-            if(arr[j]==arr[i])
-                --i;
-        }
-    }
-    return arr;
-}
 int getDigits(int num)
 {
     int size=1;
