@@ -89,7 +89,7 @@ void convert(int num)
 }
 int main(int argc , char* argv[]){
 
-    inializeTheVotes();
+inializeTheVotes();
 
     return 0;
 }
