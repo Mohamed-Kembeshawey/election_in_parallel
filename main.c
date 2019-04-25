@@ -4,8 +4,50 @@
 #include <string.h>
 #include <mpich/mpi.h>
 
-int candidats = 0;
+int candidats = 10;
 int voters = 0;
+
+
+int getDigits(int num)
+{
+    int size=1;
+    while (num>9)
+    {
+        num/=10;
+        size++;
+    }
+    return size;
+}
+
+
+void convert(FILE* myfile , int num)
+{
+    int size,copy,i,rem;
+    size=getDigits(candidats);
+    char* arr=malloc(sizeof(char)*size);
+    copy=getDigits(num);
+    for(i=0;i<size-copy;i++)
+        arr[i]='0'; //you can print 0 in file and do not use array
+    for(i=size-1;i>=size-copy;i--)
+    {
+        rem=num/10;
+        rem=num-(rem*10);
+        if(rem==0)
+            arr[i]='0';
+        else
+        {
+            arr[i]=(char)rem+48;
+            num-=rem;
+        }
+        num/=10;
+    }
+    for(i = 0; i<size ; i++){
+        fprintf(myfile , "%c" , arr[i]);
+    }
+    fprintf(myfile , " ");
+}
+
+
 
 int* myrandom(int num)
 {
@@ -30,7 +72,8 @@ void writeRandomVotes(int* vote){
     int c = 0;
     for (; c < candidats ; c++)
     {
-        fprintf (myfile, "%d ",vote[c]);
+        //fprintf (myfile, "%d ",vote[c]);
+        convert(myfile , vote[c]);
     }
     fprintf(myfile , "\n");
 
@@ -45,24 +88,24 @@ void inializeTheVotes(){
 
     int num = candidats , v;
 
+    
+    FILE* myfile;
+    myfile = fopen("overhead.txt","a");
+    fprintf (myfile, "%d ",candidats);
+    fprintf (myfile, "%d ",voters);
+    fclose(myfile);
+
+
     int *arr= malloc(sizeof(int)*num);
     for(v = 1; v <= voters ;v++)
     {
         arr=myrandom(num);
         writeRandomVotes(arr);
     }
-}
-int getDigits(int num)
-{
-    int size=1;
-    while (num>9)
-    {
-        num/=10;
-        size++;
-    }
-    return size;
+    
 }
 
+<<<<<<< HEAD
 void convert(int num)
 {
     int size,copy,i,rem;
@@ -84,9 +127,14 @@ void convert(int num)
         }
          num/=10;
     }
+=======
+
+
+>>>>>>> ef776afeac815d051f20457bb9785e05345306c9
 int main(int argc , char* argv[]){
 
-inializeTheVotes();
+    inializeTheVotes();
+
   
     return 0;
 }
