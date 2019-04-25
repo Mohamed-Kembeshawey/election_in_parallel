@@ -104,33 +104,6 @@ void inializeTheVotes(){
     }
     
 }
-
-<<<<<<< HEAD
-void convert(int num)
-{
-    int size,copy,i,rem;
-    size=getDigits(candidats);
-    char* arr=malloc(sizeof(char)*size);
-    copy=getDigits(num);
-    for(i=0;i<size-copy;i++)
-        arr[i]='0'; 
-    for(i=size-1;i>=size-copy;i--)
-    {
-        rem=num/10;
-        rem=num-(rem*10);
-        if(rem==0)
-            arr[i]='0';
-        else
-        {
-            arr[i]=(char)rem+48;
-            num-=rem;
-        }
-         num/=10;
-    }
-=======
-
-
->>>>>>> ef776afeac815d051f20457bb9785e05345306c9
 int main(int argc , char* argv[]){
 
     inializeTheVotes();
